@@ -17,7 +17,7 @@ Chinese Cultural Elements is an original R project collection that produces anim
 This work transformed a 29-by-25 matrix into a discrete heatmap using R, with a customized color scale featuring purple for luck and green for harmony. The plot gives a pixel-art representation of the Chinese god of wealth, sending data-driven wishes for 2026. An animated GIF was also created to visualize the drawing process line by line.
 
 <p align="center">
-<img src="" width="600"  />
+<img src="https://github.com/Weihua-Zhao97/Chinese_Cultural_Element/blob/main/God%20of%20Wealth/Caishen_animation.gif" width="600"  />
 </p>
 <br>
 
