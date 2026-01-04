@@ -26,7 +26,7 @@ This work transformed a 29-by-25 matrix into a discrete heatmap using R, with a 
 <br>
 
 ### 2026 Year of the Fire Horse
-This work is a vector walking horse animation created with R. Using custom coordinate data and geometric rotation algorithms, the horse's delicate silhouette (including body, mane and saddle) is defined mathematically and animated with leg movement. The horse's color gradually shifts to a vibrant fiery red, accompanied by simulated flickering fire particles—all fully generated through code without any imported images or external assets.
+This work visualized a walking horse animation in Hermès style using R. With custom coordinate data and geometric rotation algorithms, the horse's delicate silhouette (including body, mane and saddle) is defined mathematically and animated with leg movement. The horse's color gradually shifts to a vibrant fiery red, accompanied by simulated flickering fire particles—all fully generated through code without any imported images or external assets.
 
 <p align="center">
 <img src="https://github.com/Weihua-Zhao97/Chinese_Cultural_Element/blob/main/Year%20of%20the%20Fire%20Horse/fire_horse.gif" width="600"  />
