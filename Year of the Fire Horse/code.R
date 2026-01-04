@@ -82,8 +82,8 @@ transform_leg <- function(leg_data, pivot_x, pivot_y, angle) {
   return(res)
 }
 
-# Create 2026 Fire Horse animation data
-create_2026_fire_horse_animation <- function(n_frames = 40) {
+# Create Fire Horse animation data
+create_fire_horse_animation <- function(n_frames = 40) {
   all_data <- list()
   
   for (frame in 1:n_frames) {
@@ -111,19 +111,6 @@ create_2026_fire_horse_animation <- function(n_frames = 40) {
       frame = frame
     )
     
-    # 2026 text animation
-    if (frame <= 20) {
-      # Text gradually appears
-      text_alpha <- frame / 20
-      text_size <- 6 + (frame / 20) * 4
-      text_y <- 8.5 - (frame / 20) * 1  # Move from top to bottom
-    } else {
-      # Stay visible
-      text_alpha <- 1
-      text_size <- 10
-      text_y <- 7.5
-    }
-    
     # Horse color gradient (becomes redder over time, symbolizing fire horse)
     horse_color_red <- min(1.0, 0.6 + (frame / n_frames) * 0.4)  # Increase red component
     horse_color_green <- max(0.4, 0.7 - (frame / n_frames) * 0.3)  # Decrease green component
@@ -144,14 +131,6 @@ create_2026_fire_horse_animation <- function(n_frames = 40) {
       saddle = data.frame(saddle, part = "saddle", frame = frame),
       eye = data.frame(x = 1.5, y = 4.5, frame = frame),
       fire = fire_particles,
-      text_2026 = data.frame(
-        x = 5,
-        y = text_y,
-        label = "2026\nYear of the Fire Horse",
-        alpha = text_alpha,
-        size = text_size,
-        frame = frame
-      ),
       horse_color = horse_color
     )
   }
@@ -160,7 +139,7 @@ create_2026_fire_horse_animation <- function(n_frames = 40) {
 }
 
 # Generate animation data
-animation_data <- create_2026_fire_horse_animation(40)
+animation_data <- create_fire_horse_animation(40)
 
 # Extract data
 all_body <- do.call(rbind, lapply(animation_data, function(f) f$body))
@@ -175,12 +154,11 @@ all_t3 <- do.call(rbind, lapply(animation_data, function(f) f$t3))
 all_saddle <- do.call(rbind, lapply(animation_data, function(f) f$saddle))
 all_eye <- do.call(rbind, lapply(animation_data, function(f) f$eye))
 all_fire <- do.call(rbind, lapply(animation_data, function(f) f$fire))
-all_text <- do.call(rbind, lapply(animation_data, function(f) f$text_2026))
 
 # Extract dynamic horse colors
 horse_colors <- sapply(animation_data, function(f) f$horse_color)
 
-# Create 2026 Fire Horse animation
+# Create Fire Horse animation
 fire_horse_anim <- ggplot() +
   # Background
   theme_void() +
@@ -240,31 +218,21 @@ fire_horse_anim <- ggplot() +
                aes(x = x, y = y, group = frame), 
                fill = rep(horse_colors, each = nrow(leg_rl)), color = NA) +
   
-  # 2026 Fire Horse text - SIMPLE GOLD COLOR
-  geom_text(data = all_text,
-            aes(x = x, y = y, label = label, 
-                alpha = alpha, size = size),
-            color = "gold", 
-            fontface = "bold",
-            hjust = 0.5,
-            vjust = 0.5,
-            lineheight = 0.8) +
-  scale_alpha_identity() +
-  scale_size_identity() +
   coord_fixed(ratio = 1) +
-  coord_cartesian(xlim = c(0, 10), ylim = c(0, 9)) +
+  coord_cartesian(xlim = c(0, 10), ylim = c(0, 7.5)) +
   
   # Animation
   transition_states(frame, transition_length = 0.3, state_length = 0.1) +
   ease_aes("linear")
 
-# Render 2026 Fire Horse animation
+# Render Fire Horse animation
 animate(fire_horse_anim,
         nframes = 40,
         fps = 10,
         width = 800,
         height = 600,
         renderer = gifski_renderer(),
-        detail = 5)
+        detail = 5
+       )
                        
-anim_save("2026_fire_horse_year.gif", animation = last_animation())
+anim_save("fire_horse.gif", animation = last_animation())
